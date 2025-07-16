@@ -5,7 +5,10 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: String,
+  description:{
+    type: String,
+    default: '',
+  },
   completed: {
     type: Boolean,
     default: false,
@@ -25,3 +28,4 @@ const todoSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Todo', todoSchema);
+

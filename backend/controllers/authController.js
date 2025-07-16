@@ -18,8 +18,8 @@ const registerUser = async (req, res) => {
       email: user.email,
       token: generateToken(user._id),
     });
-  } 
-  catch (err) {
+  } catch (err) {
+    console.error('Error during user registration:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };

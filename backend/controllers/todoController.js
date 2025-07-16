@@ -1,29 +1,40 @@
 // controllers/todoController.js
 const Todo = require('../models/todo');
 
-const getTodos = async (req, res) => {
-  // Fetch todos for the logged-in user
-  const todos = await Todo.find({ user: req.user._id }).populate('category');
-  res.json(todos);
-};
-
 const createTodo = async (req, res) => {
   const { title, description, category } = req.body;
+
+  if (!title || !category) {
+    return res.status(400).json({ message: 'Title and category are required' });
+  }
+
   try {
-    const todo = await Todo.create({
+    const newTodo = new Todo({
       title,
-      description,
+      description: description || '',
+      completed: false,
       category,
-      user: req.user._id,
+      user: req.user.id,
     });
-    res.status(201).json(todo);
+
+    const savedTodo = await newTodo.save();
+    res.status(201).json(savedTodo);
+  } catch (error) {
+    console.error('Error creating todo:', error);
+    res.status(500).json({ message: 'Failed to create todo' });
+  }
+};
+
+const getTodo = async (req, res) => {
+  try {
+    const todos = await Todo.find({ user: req.user._id }).populate('category');
+    res.json(todos);
   } catch (err) {
-    res.status(400).json({ message: 'Failed to create todo' });
+    res.status(500).json({ message: 'Failed to fetch todos' });
   }
 };
 
 module.exports = {
-  getTodos,
   createTodo,
-  // add other handlers here later
+  getTodo,
 };
