@@ -1,46 +1,10 @@
-// import { useState, useContext } from 'react';
-// import { signup } from '../services/auth';
-// import { AuthContext } from '../context/AuthContext';
-// import { useNavigate } from 'react-router-dom';
-
-// const SignupPage = () => {
-//   const [form, setForm] = useState({ username: '', email: '', password: '' });
-//   const { loginUser } = useContext(AuthContext);
-//   const navigate = useNavigate();
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSignup = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await signup(form);
-//       loginUser(res.data);
-//       navigate('/');
-//     } catch (err) {
-//       alert('Signup failed.');
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSignup}>
-//       <h2>Sign Up</h2>
-//       <input name="username" placeholder="Username" onChange={handleChange} />
-//       <input name="email" placeholder="Email" onChange={handleChange} />
-//       <input name="password" type="password" placeholder="Password" onChange={handleChange} />
-//       <button type="submit">Sign Up</button>
-//     </form>
-//   );
-// };
-
-// export default SignupPage;
-
-
-
 import { signup } from '../services/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../styles/Auth.css"; // Import the CSS
+import React from "react";
+
+
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -68,9 +32,12 @@ const SignupPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="auth-container">
+    <form onSubmit={handleSubmit} className="auth-form">
+      <h2 className="auth-title">Sign Up</h2>
       <input
         placeholder="Username"
+        type="text"
         value={formData.name}
         onChange={(e) => setFormData({ ...formData, username: e.target.value })}
       /><br />
@@ -87,8 +54,11 @@ const SignupPage = () => {
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       /><br />
       <button type="submit">Sign Up</button>
+      <p className="auth-switch">Already have an account? <a href="/login">Login</a></p>
     </form>
+    </div>
   );
 };
 
 export default SignupPage;
+

@@ -34,6 +34,11 @@ const getTodo = async (req, res) => {
   }
 };
 
+// router.get('/category/:id/todos', protect, async (req, res) => {
+//   const todos = await Todo.find({ category: req.params.id });
+//   res.json(todos);
+// });
+
 module.exports = {
   createTodo,
   getTodo,
