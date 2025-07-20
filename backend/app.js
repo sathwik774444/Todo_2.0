@@ -12,7 +12,12 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: "https://todo-2-0-one.vercel.app/",
+  credentials: true
+}));
+
 app.use(express.json()); // parse incoming JSON
 
 // public Routes
