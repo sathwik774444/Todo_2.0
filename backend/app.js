@@ -20,7 +20,8 @@ app.use('/api/auth', authRoutes);
 
 // protected Routes
 app.use('/api/categories', protect, categoryRoutes); 
-app.use('/api/todos', protect, todoRoutes);          
+app.use('/api/todos', protect, todoRoutes); 
+
 
 // Basic health check route
 app.get('/', (req, res) => {

@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../services/api'; // Use the configured API instance
 
 const CategoryTodos = () => {
-  const { id } = useParams(); // category id
+  const { id } = useParams(); // Category ID
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {

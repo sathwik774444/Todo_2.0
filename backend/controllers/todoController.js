@@ -34,12 +34,19 @@ const getTodo = async (req, res) => {
   }
 };
 
-// router.get('/category/:id/todos', protect, async (req, res) => {
-//   const todos = await Todo.find({ category: req.params.id });
-//   res.json(todos);
-// });
+const getTodosByCategory = async (req, res) => {
+  const { id } = req.params; // Category ID
+  try {
+    const todos = await Todo.find({ category: id, user: req.user._id }).populate('category');
+    res.json(todos);
+  } catch (err) {
+    console.error('Error fetching todos by category:', err);
+    res.status(500).json({ message: 'Failed to fetch todos for the category' });
+  }
+};
 
 module.exports = {
   createTodo,
   getTodo,
+  getTodosByCategory, // Export the new function
 };

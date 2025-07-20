@@ -1,32 +1,23 @@
-// src/pages/Dashboard.jsx
-import { useEffect, useState } from 'react';
-import { getCategories, createCategory } from '../services/category';
-import CategoryList from '../components/CategoryList';
+// pages/Dashboard.jsx
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from '../services/api'; // your API service file
+import '../styles/Dashboard.css'; // for CSS grid
 
 const Dashboard = () => {
   const [categories, setCategories] = useState([]);
-  const [name, setName] = useState('');
+  const [newCategory, setNewCategory] = useState('');
+  const navigate = useNavigate();
 
   const fetchCategories = async () => {
-    try {
-      const res = await getCategories();
-      setCategories(res.data);
-    } catch (err) {
-      console.error('Fetch category error:', err);
-    }
+    const res = await axios.get('/categories');
+    setCategories(res.data);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!name.trim()) return;
-
-    try {
-      await createCategory({ name });
-      setName('');
-      fetchCategories(); // Refresh list
-    } catch (err) {
-      alert('Failed to create category');
-    }
+  const handleAdd = async () => {
+    await axios.post('/categories', { name: newCategory });
+    setNewCategory('');
+    fetchCategories(); // refresh
   };
 
   useEffect(() => {
@@ -35,17 +26,29 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Your Categories</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="New Category"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
+      <h1>Your Categories</h1>
+      <input
+        placeholder="New Category"
+        value={newCategory}
+        onChange={(e) => setNewCategory(e.target.value)}
+      />
+      <button onClick={handleAdd}>Add</button>
 
-      <CategoryList categories={categories} />
+      <div className="grid-container">
+        {categories.length > 0 ? (
+          categories.map((cat) => (
+            <div
+              key={cat._id}
+              className="grid-item"
+              onClick={() => navigate(`/category/${cat._id}`)}
+            >
+              {cat.name}
+            </div>
+          ))
+        ) : (
+          <p>No categories yet.</p>
+        )}
+      </div>
     </div>
   );
 };
