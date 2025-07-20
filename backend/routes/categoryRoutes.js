@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const { getCategories, createCategory } = require('../controllers/categoryController');
+const {
+  getCategories,
+  createCategory,
+  deleteCategory, // ⬅️ Add this
+} = require('../controllers/categoryController');
 
+const Category = require('../models/category');
+
+// Routes
 router.get('/', getCategories);
 router.post('/', createCategory);
-// GET /api/categories/:id
 router.get('/:id', async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
@@ -16,4 +22,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
+router.delete('/:id', deleteCategory);
+
 module.exports = router;
+

@@ -1,4 +1,3 @@
-// controllers/todoController.js
 const Todo = require('../models/todo');
 
 const createTodo = async (req, res) => {
@@ -48,5 +47,5 @@ const getTodosByCategory = async (req, res) => {
 module.exports = {
   createTodo,
   getTodo,
-  getTodosByCategory, // Export the new function
+  getTodosByCategory, 
 };
