@@ -24,7 +24,8 @@ const SignupPage = () => {
       if (err.response && err.response.data && err.response.data.message) {
         alert(`Signup failed: ${err.response.data.message}`);
       } else {
-        alert('Signup failed. Please try again.');
+        // alert('Signup failed. Please try again.');
+        alert("Signup failed: " + (err.response?.data?.message || "Please try again."));
       }
     }
   };
