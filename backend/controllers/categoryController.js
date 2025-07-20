@@ -37,27 +37,24 @@ const createCategory = async (req, res) => {
   }
 };
 
-// ⬇️ ADD THIS DELETE CONTROLLER
+
 const deleteCategory = async (req, res) => {
   try {
-    const category = await Category.findById(req.params.id);
-    if (!category) {
-      return res.status(404).json({ message: 'Category not found' });
-    }
+    const categoryId = req.params.id;
 
-    // Check if the category belongs to the current user
-    if (category.user.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to delete this category' });
-    }
+    // Step 1: Delete all todos associated with the category
+    await Todo.deleteMany({ category: categoryId });
 
-    await category.deleteOne(); // <-- Use deleteOne instead of remove (modern Mongoose)
+    // Step 2: Delete the category itself
+    await Category.findByIdAndDelete(categoryId);
 
-    res.json({ message: 'Category deleted successfully' });
+    res.status(200).json({ message: 'Category and its todos deleted successfully' });
   } catch (err) {
-    console.error('Error deleting category:', err); // ✅ Add this log
+    console.error('Error deleting category:', err);
     res.status(500).json({ message: 'Failed to delete category' });
   }
 };
+
 
 
 module.exports = {
