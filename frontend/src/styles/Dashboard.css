@@ -67,7 +67,7 @@
 }
 
 .delete-button {
-  position: absolute;
+  /* position: absolute; */
   top: 8px;
   right: 12px;
   background: transparent;
