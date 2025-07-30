@@ -121,7 +121,7 @@
 }
 
 /* ✅ Delete button style */
-.delete-button {
+.delete-button-item {
   background-color: #e74c3c;
   color: white;
   border: none;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../services/api';
 import '../styles/Dashboard.css';
@@ -21,6 +21,8 @@ const Dashboard = () => {
   };
 
   const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this task?')) return;  
+
     await axios.delete(`/categories/${id}`);
     fetchCategories();
   };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../services/api';
 import '../styles/TodoListPage.css'; 
@@ -104,7 +104,7 @@ const TodoListPage = () => {
             <li key={todo._id} className="todo-item">
               <span>{todo.title}</span>
               <button
-                className="delete-button"
+                className="delete-button-item"
                 onClick={() => handleDeleteTodo(todo._id)}
               >
                 Delete
