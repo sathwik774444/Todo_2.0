@@ -56,6 +56,17 @@ const TodoListPage = () => {
     }
   };
 
+  const handleDeleteTodo = async (todoId) => {
+    if (!window.confirm('Are you sure you want to delete this task?')) return;  
+
+    try {
+      await axios.delete(`/todos/${todoId}`);
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo._id !== todoId));
+    } catch (err) {
+      console.error('Error deleting todo:', err.response?.data?.message || err.message);
+      alert('Failed to delete todo');
+    }
+  }
   useEffect(() => {
     fetchTodos().then(() => {
       if (todos.length === 0) {
@@ -91,7 +102,13 @@ const TodoListPage = () => {
         <ul className="todo-list">
           {todos.map((todo) => (
             <li key={todo._id} className="todo-item">
-              {todo.title}
+              <span>{todo.title}</span>
+              <button
+                className="delete-button"
+                onClick={() => handleDeleteTodo(todo._id)}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>

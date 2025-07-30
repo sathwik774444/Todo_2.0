@@ -44,28 +44,27 @@ const getTodosByCategory = async (req, res) => {
   }
 };
 
-// // Delete a todo by ID
-// const deleteTodo = async (req, res) => {
-//   const { id } = req.params; // Todo ID
-//   try {
-//     // Find and delete only if it belongs to the logged-in user
-//     const todo = await Todo.findOneAndDelete({ _id: id, user: req.user._id });
+const deleteTodo = async (req, res) => {
+  try {   
+    const todo = await Todo.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id, // ensure only owner can delete
+    });
 
-//     if (!todo) {
-//       return res.status(404).json({ message: "Todo not found or not authorized" });
-//     }
+    if (!todo) {
+      return res.status(404).json({ message: 'Todo not found or not authorized' });
+    }
 
-//     res.json({ message: "Todo deleted successfully" });
-//   } catch (err) {
-//     console.error("Error deleting todo:", err);
-//     res.status(500).json({ message: "Failed to delete todo" });
-//   }
-// };
-
+    res.json({ message: 'Todo deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting todo:', err);
+    res.status(500).json({ message: 'Failed to delete todo' });
+  }
+};
 
 module.exports = {
   createTodo,
   getTodo,
   getTodosByCategory, 
-  // deleteTodo,
+  deleteTodo, // export new controller
 };

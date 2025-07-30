@@ -1,4 +1,4 @@
-.todo-container {
+/* .todo-container {
   max-width: 600px;
   margin: 40px auto;
   padding: 30px;
@@ -55,4 +55,84 @@
   border-left: 5px solid #007bff;
   font-size: 17px;
   color: #333;
+} */
+
+
+.todo-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.todo-input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 12px 18px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border-left: 5px solid #007bff;
+  font-size: 17px;
+  color: #333;
+}
+
+/* ✅ Delete button style */
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
 }
