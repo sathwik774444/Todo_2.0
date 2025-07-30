@@ -2,15 +2,18 @@ import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { login } from '../services/auth';
 import { useNavigate} from 'react-router-dom';
+import Preloader from '../components/Preloader'; // import the preloader
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false); // track preloader
   const { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // show preloader when login starts
     try {
       const res = await login({ email, password });
       loginUser(res.data);
@@ -23,7 +26,14 @@ const LoginPage = () => {
         alert('Login failed. Please try again.');
       }
     }
+    finally {
+      setLoading(false); // hide preloader after success/fail
+    }
   };
+
+  if (loading) {
+    return <Preloader />; // show preloader instead of form
+  }
 
   return (
      <div className="auth-container">
@@ -42,7 +52,9 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         /><br />
       <button type="submit">Login</button>
-      <p className="auth-switch">Don't have an account?  <a href="/signup">SignUp</a></p>
+      <p className="auth-switch">
+        Don't have an account?  <a href="/signup">SignUp</a>
+      </p>
     </form>
     </div>
   );
