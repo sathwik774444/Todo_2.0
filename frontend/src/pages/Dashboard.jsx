@@ -47,15 +47,19 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <div className='Navbar'>
         <h1 className="greeting">
-          👋 {user ? `,${username}` : '!'} Namaste
+          👋 {user ? `${username}` : '!'} Namaste
         </h1>
         <button onClick={logoutUser} className="logout-button">
           Logout
         </button>
       </div>
       <div className="notice-box">
-        <p className="notice-title">📢 Notice</p>
-        <p>We added the login such that when user refresh the page then it is loggedin , until the user press the logout button which is appeared at top-right of this page!</p>
+        <div className="scrolling-text">
+          We added login persistence so that when the user refreshes the page, 
+          they remain logged in until they press the logout button, 
+          which appears at the top-right of the page.
+          If you have any suggestions, please send them to this email: sathwikkulkarni123@gmail.com
+        </div>
       </div>
       <div className="input-section">
         <input
