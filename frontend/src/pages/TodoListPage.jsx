@@ -47,7 +47,6 @@ const TodoListPage = () => {
         title: newTodo,
         category: id,
       });
-      // console.log(`category id is ${id}`);
       setNewTodo('');
       fetchTodos();
     } catch (err) {
@@ -68,7 +67,6 @@ const TodoListPage = () => {
     }
   }
   useEffect(() => {
-    // console.log(`how are you ${id}`);
     fetchTodos().then(() => {
       if (todos.length === 0) {
         fetchCategoryName();

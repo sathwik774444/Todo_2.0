@@ -1,7 +1,6 @@
 const Category = require('../models/category');
 const Todo = require('../models/todo');
 
-
 const getCategories = async (req, res) => {
   try {
     const categories = await Category.find({ user: req.user._id }).sort({ createdAt: -1 });
@@ -23,7 +22,6 @@ const getCategories = async (req, res) => {
   }
 };
 
-
 const createCategory = async (req, res) => {
   const { name } = req.body;
   try {
@@ -36,7 +34,6 @@ const createCategory = async (req, res) => {
     res.status(400).json({ message: 'Failed to create category' });
   }
 };
-
 
 const deleteCategory = async (req, res) => {
   try {

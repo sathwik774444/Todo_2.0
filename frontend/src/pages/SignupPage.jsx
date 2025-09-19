@@ -2,7 +2,6 @@ import { signup } from '../services/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Auth.css"; // Import the CSS
-// import React from "react";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -24,7 +23,6 @@ const SignupPage = () => {
       if (err.response && err.response.data && err.response.data.message) {
         alert(`Signup failed: ${err.response.data.message}`);
       } else {
-        // alert('Signup failed. Please try again.');
         alert("Signup failed: " + (err.response?.data?.message || "Please try again."));
       }
     }
