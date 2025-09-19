@@ -32,29 +32,29 @@ const SignupPage = () => {
 
   return (
     <div className="auth-container">
-    <form onSubmit={handleSubmit} className="auth-form">
-      <h2 className="auth-title">Sign Up</h2>
-      <input
-        placeholder="Username"
-        type="text"
-        value={formData.name}
-        onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-      /><br />
-      <input
-        placeholder="Email"
-        type="email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-      /><br />
-      <input
-        placeholder="Password"
-        type="password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-      /><br />
-      <button type="submit">Sign Up</button>
-      <p className="auth-switch">Already have an account? <a href="/login">Login</a></p>
-    </form>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <h2 className="auth-title">Sign Up</h2>
+        <input
+          placeholder="Username"
+          type="text"
+          value={formData.username}
+          onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+        /><br />
+        <input
+          placeholder="Email"
+          type="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        /><br />
+        <input
+          placeholder="Password"
+          type="password"
+          value={formData.password}
+          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+        /><br />
+        <button type="submit">Sign Up</button>
+        <p className="auth-switch">Already have an account? <a href="/login">Login</a></p>
+      </form>
     </div>
   );
 };

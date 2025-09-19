@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../services/api';
-import '../styles/TodoListPage.css'; 
+import '../styles/TodoListPage.css';
 
 const TodoListPage = () => {
   const { id } = useParams();
@@ -10,7 +10,6 @@ const TodoListPage = () => {
   const [newTodo, setNewTodo] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
   const fetchTodos = async () => {
     try {
       setLoading(true);
@@ -48,6 +47,7 @@ const TodoListPage = () => {
         title: newTodo,
         category: id,
       });
+      // console.log(`category id is ${id}`);
       setNewTodo('');
       fetchTodos();
     } catch (err) {
@@ -57,7 +57,7 @@ const TodoListPage = () => {
   };
 
   const handleDeleteTodo = async (todoId) => {
-    if (!window.confirm('Are you sure you want to delete this task?')) return;  
+    if (!window.confirm('Are you sure you want to delete this task?')) return;
 
     try {
       await axios.delete(`/todos/${todoId}`);
@@ -68,6 +68,7 @@ const TodoListPage = () => {
     }
   }
   useEffect(() => {
+    // console.log(`how are you ${id}`);
     fetchTodos().then(() => {
       if (todos.length === 0) {
         fetchCategoryName();

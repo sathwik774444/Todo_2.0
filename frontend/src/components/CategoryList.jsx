@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 import TodoForm from './TodoForm';
 
 const CategoryList = ({ categories }) => {
-  if (!categories.length) return <p>No categories yet.</p>;
+  if (!Array.isArray(categories) || categories.length === 0){
+    return <p>No Categories Created yet.</p>;
+  }
 
   return (
     <ul>

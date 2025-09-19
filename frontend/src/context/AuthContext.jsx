@@ -1,30 +1,41 @@
 import { createContext, useState, useEffect } from 'react';
+import API from '../services/api';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // On page reload, keep user logged in
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) setUser(storedUser);
+    const checkUser = async()=>{
+      const token = localStorage.getItem('token');
+      if(token){
+        try{
+          const res = await API.get('/auth/me');
+          setUser(res.data);//user without password
+        }catch(err){
+          console.error('Token invalid or expired:', err);
+          localStorage.removeItem('token');//clear bad token
+        }
+      }
+      setLoading(false);
+    };
+    checkUser();
   }, []);
 
   const loginUser = (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('token', userData.token);
     setUser(userData);
+    localStorage.setItem('token', userData.token);//save token for persistence
   };
 
   const logoutUser = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
     setUser(null);
+    localStorage.removeItem('token');
   };
 
   return (
-    <AuthContext.Provider value={{ user, loginUser, logoutUser }}>
+    <AuthContext.Provider value={{ user, loginUser, logoutUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

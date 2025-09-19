@@ -87,3 +87,39 @@
   color: #666;
   margin-top: 8px;
 }
+.Navbar{
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+.logout-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #e60000;
+}
+
+.notice-box {
+  background: #fff8e1;
+  border-left: 6px solid #ff9800;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.notice-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #e65100;
+}
